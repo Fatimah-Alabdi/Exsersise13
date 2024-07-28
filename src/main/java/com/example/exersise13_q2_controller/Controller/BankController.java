@@ -32,19 +32,19 @@ public class BankController {
         return new ApiRespons("Customer Deleted Successfully");
 
     }
-    @PostMapping("/deposit/{index}")
-    public ApiRespons deposit( @PathVariable int index,@RequestBody Amount amount) {
+    @PutMapping("/deposit/{index}/{amount}")
+    public ApiRespons deposit( @PathVariable int index,@PathVariable double amount) {
         Customers customer = customersList.get(index);
-       customer.setBalance(customer.getBalance() +amount.getAmount());
+       customer.setBalance(customer.getBalance() +amount);
 
         return new ApiRespons("Amount Deposited Successfully");
 
     }
-    @PostMapping("/withdraw/{index}")
-    public ApiRespons withdraw(@PathVariable int index, @RequestBody Amount amount) {
+    @PutMapping("/withdraw/{index}/{amount}")
+    public ApiRespons withdraw(@PathVariable int index, @PathVariable double amount) {
         Customers customer = customersList.get(index);
         if (customer.getBalance() >= amount.getAmount()) {
-            customer.setBalance(customer.getBalance() - amount.getAmount());
+            customer.setBalance(customer.getBalance() - amount);
 
             return new ApiRespons("Amount withdraw Successfully");
 
